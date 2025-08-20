@@ -13,9 +13,11 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e4a8c 0%, #2e5aa8 50%, #ffffff 100%);
+            background: linear-gradient(135deg, #3d6cb5 0%, #5a8dd4 25%, #7bb5f0 50%, #a8d0ff 75%, #e8f4ff 100%);
             min-height: 100vh;
             padding: 20px;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         .container {
@@ -23,7 +25,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(30, 74, 140, 0.2);
+            box-shadow: 0 20px 40px rgba(30, 74, 140, 0.25);
             overflow: hidden;
             border-top: 5px solid #1e4a8c;
         }
@@ -36,7 +38,7 @@
             position: relative;
         }
 
-        .logo-container {
+       .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,20 +47,24 @@
         }
 
         .logo-placeholder {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1e4a8c;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-            line-height: 1.2;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
         .header h1 {
             font-size: 2.2em;
             margin-bottom: 10px;
@@ -238,6 +244,11 @@
             line-height: 1.5;
         }
 
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 20px;
@@ -271,7 +282,8 @@
         <div class="header">
             <div class="logo-container">
                 <div class="logo-placeholder">
-                    réseau31<br>SMEA
+                    <!-- logooooo-->
+              <img src="logo-reseau31.png" alt="logo reseau31 -SMEA">
                 </div>
             </div>
             <h1>Maya Smaili</h1>
@@ -297,80 +309,84 @@
                 <h2>💭 Vos Retours & Conseils</h2>
                 <div class="feedback-form">
                     <div id="successMessage" class="success-message" style="display: none;">
-                        ✅ Merci pour votre retour ! Un email a été généré avec vos commentaires.
+                        ✅ Merci pour votre retour ! Votre message a bien été envoyé.
                     </div>
 
-                    <div class="form-group">
-                        <label>Votre nom <span class="label-hint">(optionnel - sera anonyme si laissé vide)</span></label>
-                        <input type="text" id="name" placeholder="Votre prénom ou nom">
-                    </div>
+                    <!-- FORMULAIRE FORMSPREE -->
+                    <form id="feedbackForm" action="https://formspree.io/f/xnnzkwdw" method="POST">
+                        <div class="form-group">
+                            <label>Votre nom <span class="label-hint">(optionnel - sera anonyme si laissé vide)</span></label>
+                            <input type="text" name="name" id="name" placeholder="Votre prénom ou nom">
+                        </div>
 
-                    <div class="form-group">
-                        <label>Votre service/fonction</label>
-                        <select id="role">
-                            <option value="">Sélectionnez...</option>
-                            <option value="Collègue Service SIC">Collègue Service SIC</option>
-                            <option value="Manager/Responsable">Manager/Responsable</option>
-                            <option value="Tuteur/Maître d'apprentissage">Tuteur/Maître d'apprentissage</option>
-                            <option value="Service RH">Service RH</option>
-                            <option value="Autre service Réseau31">Autre service Réseau31</option>
-                            <option value="Partenaire externe">Partenaire externe</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>Votre service/fonction</label>
+                            <select name="role" id="role" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="Collègue Service SIC">Collègue Service SIC</option>
+                                <option value="Manager/Responsable">Manager/Responsable</option>
+                                <option value="Tuteur/Maître d'apprentissage">Tuteur/Maître d'apprentissage</option>
+                                <option value="Service RH">Service RH</option>
+                                <option value="Autre service Réseau31">Autre service Réseau31</option>
+                                <option value="Partenaire externe">Partenaire externe</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Comment évalueriez-vous globalement mon passage à Réseau31 ?</label>
-                        <div class="rating-container">
-                            <div class="rating-item" data-rating="1">
-                                <div class="rating-emoji">😔</div>
-                                <div>À améliorer</div>
-                            </div>
-                            <div class="rating-item" data-rating="2">
-                                <div class="rating-emoji">😐</div>
-                                <div>Correct</div>
-                            </div>
-                            <div class="rating-item" data-rating="3">
-                                <div class="rating-emoji">😊</div>
-                                <div>Bien</div>
-                            </div>
-                            <div class="rating-item" data-rating="4">
-                                <div class="rating-emoji">😄</div>
-                                <div>Très bien</div>
-                            </div>
-                            <div class="rating-item" data-rating="5">
-                                <div class="rating-emoji">🤩</div>
-                                <div>Excellent</div>
+                        <div class="form-group">
+                            <label>Comment évalueriez-vous globalement mon passage à Réseau31 ?</label>
+                            <input type="hidden" name="rating" id="ratingInput" required>
+                            <div class="rating-container">
+                                <div class="rating-item" data-rating="1">
+                                    <div class="rating-emoji">😔</div>
+                                    <div>À améliorer</div>
+                                </div>
+                                <div class="rating-item" data-rating="2">
+                                    <div class="rating-emoji">😐</div>
+                                    <div>Correct</div>
+                                </div>
+                                <div class="rating-item" data-rating="3">
+                                    <div class="rating-emoji">😊</div>
+                                    <div>Bien</div>
+                                </div>
+                                <div class="rating-item" data-rating="4">
+                                    <div class="rating-emoji">😄</div>
+                                    <div>Très bien</div>
+                                </div>
+                                <div class="rating-item" data-rating="5">
+                                    <div class="rating-emoji">🤩</div>
+                                    <div>Excellent</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Mes points forts selon vous <span class="label-hint">(compétences techniques, relationnelles, attitude...)</span></label>
-                        <textarea id="strengths" placeholder="Ce que vous avez apprécié dans mes analyses, mon approche, mes relations avec l'équipe, ma capacité d'adaptation..."></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>Mes points forts selon vous <span class="label-hint">(compétences techniques, relationnelles, attitude...)</span></label>
+                            <textarea name="strengths" id="strengths" placeholder="Ce que vous avez apprécié dans mes analyses, mon approche, mes relations avec l'équipe, ma capacité d'adaptation..."></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Axes d'amélioration pour la suite</label>
-                        <textarea id="improvements" placeholder="Des conseils constructifs pour mon développement professionnel en tant que Data Analyst -soft skils ou hard skils- ..."></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>Axes d'amélioration pour la suite</label>
+                            <textarea name="improvements" id="improvements" placeholder="Des conseils constructifs pour mon développement professionnel en tant que Data Analyst -soft skils ou hard skils- ..."></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Un conseil pour mon avenir professionnel ?</label>
-                        <textarea id="advice" placeholder="Technologies data à approfondir, compétences à développer, orientations de carrière et conseil sur le plan personnel ou professionnel..."></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>Un conseil pour mon avenir professionnel ?</label>
+                            <textarea name="advice" id="advice" placeholder="Technologies data à approfondir, compétences à développer, orientations de carrière et conseil sur le plan personnel ou professionnel..."></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Un souvenir de notre collaboration ?</label>
-                        <textarea id="memory" placeholder="Un moment marquant, une anecdote,un souvenir, La première chose qui vous vient à l’esprit quand on dit MAYA (hors projet décisionnel 😉)…"> </textarea>
-                    </div>
+                        <div class="form-group">
+                            <label>Un souvenir de notre collaboration ?</label>
+                            <textarea name="memory" id="memory" placeholder="Un moment marquant, une anecdote,un souvenir, La première chose qui vous vient à l'esprit quand on dit MAYA (hors projet décisionnel 😉)…"></textarea>
+                        </div>
 
-                    <button class="submit-btn" onclick="generateEmail()">
-                        📧 Envoyer mes commentaires par email
-                    </button>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            📧 Envoyer mes commentaires
+                        </button>
+                    </form>
                 </div>
 
                 <div class="info-box">
-                    <h3>🎯 Objectif de cette démarche</h3>
+                    <h3> Objectif de cette démarche</h3>
                     <p>Cette première expérience professionnelle chez Réseau31 marque le début de mon parcours. Vos retours m'aideront à mieux comprendre mes forces et les axes de progression pour ma future carrière en analyse de données. Merci de prendre le temps de partager votre perspective !</p>
                 </div>
             </div>
@@ -379,6 +395,7 @@
 
     <script>
         let selectedRating = null;
+        const ratingText = ['', 'À améliorer', 'Correct', 'Bien', 'Très bien', 'Excellent'];
 
         // Gestion des ratings
         document.querySelectorAll('.rating-item').forEach(item => {
@@ -386,23 +403,28 @@
                 document.querySelectorAll('.rating-item').forEach(i => i.classList.remove('selected'));
                 this.classList.add('selected');
                 selectedRating = this.getAttribute('data-rating');
+                document.getElementById('ratingInput').value = ratingText[selectedRating];
             });
         });
 
-        function generateEmail() {
-            const name = document.getElementById('name').value || 'Anonyme';
+        // Gestion de la soumission du formulaire
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             const role = document.getElementById('role').value;
+            const rating = document.getElementById('ratingInput').value;
             const strengths = document.getElementById('strengths').value;
             const improvements = document.getElementById('improvements').value;
             const advice = document.getElementById('advice').value;
             const memory = document.getElementById('memory').value;
 
+            // Validations
             if (!role) {
                 alert('Veuillez sélectionner votre service/fonction');
                 return;
             }
 
-            if (!selectedRating) {
+            if (!rating) {
                 alert('Veuillez donner une évaluation globale');
                 return;
             }
@@ -412,54 +434,49 @@
                 return;
             }
 
-            const ratingText = ['', 'À améliorer', 'Correct', 'Bien', 'Très bien', 'Excellent'];
+            // Affichage du loading
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Envoi en cours...';
+            submitBtn.disabled = true;
+            document.querySelector('.feedback-form').classList.add('loading');
+
+            // Envoi vers Formspree
+            const formData = new FormData(this);
             
-            // Génération du contenu email
-            let emailBody = `Feedback pour Maya Smaili - Data Analyst Réseau31%0D%0A%0D%0A`;
-            emailBody += `De : ${name}%0D%0A`;
-            emailBody += `Service/Fonction : ${role}%0D%0A`;
-            emailBody += `Évaluation globale du passage à Réseau31 : ${ratingText[selectedRating]}%0D%0A%0D%0A`;
-
-            if (strengths) {
-                emailBody += `POINTS FORTS :%0D%0A${encodeURIComponent(strengths)}%0D%0A%0D%0A`;
-            }
-
-            if (improvements) {
-                emailBody += `AXES D'AMÉLIORATION :%0D%0A${encodeURIComponent(improvements)}%0D%0A%0D%0A`;
-            }
-
-            if (advice) {
-                emailBody += `CONSEILS POUR L'AVENIR :%0D%0A${encodeURIComponent(advice)}%0D%0A%0D%0A`;
-            }
-
-            if (memory) {
-                emailBody += `SOUVENIR/ANECDOTE :%0D%0A${encodeURIComponent(memory)}%0D%0A%0D%0A`;
-            }
-
-            emailBody += `Date : ${new Date().toLocaleDateString('fr-FR')}`;
-
-            // Génération du lien mailto
-            const mailtoLink = `mailto:mayasmaili26@gmail.com?subject=Feedback%20Alternance%20-%20Maya%20Smaili%20-%20Réseau31&body=${emailBody}`;
-            
-            // Ouverture du client email
-            window.location.href = mailtoLink;
-
-            // Affichage du message de succès
-            document.getElementById('successMessage').style.display = 'block';
-
-            // Reset du formulaire après 2 secondes
-            setTimeout(() => {
-                document.getElementById('name').value = '';
-                document.getElementById('role').value = '';
-                document.getElementById('strengths').value = '';
-                document.getElementById('improvements').value = '';
-                document.getElementById('advice').value = '';
-                document.getElementById('memory').value = '';
-                document.querySelectorAll('.rating-item').forEach(i => i.classList.remove('selected'));
-                selectedRating = null;
-                document.getElementById('successMessage').style.display = 'none';
-            }, 2000);
-        }
+            fetch('https://formspree.io/f/xnnzkwdw', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Succès
+                    document.getElementById('successMessage').style.display = 'block';
+                    this.reset();
+                    document.querySelectorAll('.rating-item').forEach(i => i.classList.remove('selected'));
+                    selectedRating = null;
+                    
+                    // Scroll vers le message de succès
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    
+                } else {
+                    throw new Error('Erreur réseau');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+            })
+            .finally(() => {
+                // Restaurer le bouton
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                document.querySelector('.feedback-form').classList.remove('loading');
+            });
+        });
 
         // Fonction pour ajouter une vidéo
         function addVideo(videoUrl) {
