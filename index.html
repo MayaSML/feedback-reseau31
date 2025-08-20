@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya Smaili - Data Analyst Réseau31 - Retours & Conseils</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e4a8c 0%, #2e5aa8 50%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(30, 74, 140, 0.2);
+            overflow: hidden;
+            border-top: 5px solid #1e4a8c;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e4a8c 0%, #2e5aa8 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4a8c;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header .experience-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border-left: 5px solid #1e4a8c;
+        }
+
+        .section h2 {
+            color: #1e4a8c;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .video-placeholder {
+            background: #e3f2fd;
+            border: 3px dashed #1e4a8c;
+            border-radius: 10px;
+            padding: 60px 20px;
+            text-align: center;
+            color: #1e4a8c;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .feedback-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(30, 74, 140, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1e4a8c;
+        }
+
+        .form-group .label-hint {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e4a8c;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .rating-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .rating-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e3f2fd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 100px;
+        }
+
+        .rating-item:hover {
+            border-color: #1e4a8c;
+            background: #e3f2fd;
+        }
+
+        .rating-item.selected {
+            border-color: #1e4a8c;
+            background: #1e4a8c;
+            color: white;
+        }
+
+        .rating-emoji {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #1e4a8c 0%, #2e5aa8 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 74, 140, 0.4);
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #1e4a8c;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .info-box h3 {
+            color: #1e4a8c;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .rating-container {
+                justify-content: center;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    réseau31<br>SMEA
+                </div>
+            </div>
+            <h1>Maya Smaili</h1>
+            <div class="subtitle">Data Analyst • Service SIC • Pôle Développement et Référentiel</div>
+            <div class="experience-badge"> Ma première expérience professionnelle • Alternance 2024-2025</div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>📹 Ma Présentation Vidéo</h2>
+                <div class="video-placeholder" id="videoContainer">
+                    <p>🎬 Présentation de mon parcours</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        "Mon projet, mes défis, mes apprentissages en tant que Data Analyst..."
+                    </p>
+                </div>
+                <p style="text-align: center; color: #666; font-style: italic;">
+                    Une approche authentique de ma première expérience professionnelle
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>💭 Vos Retours & Conseils</h2>
+                <div class="feedback-form">
+                    <div id="successMessage" class="success-message" style="display: none;">
+                        ✅ Merci pour votre retour ! Un email a été généré avec vos commentaires.
+                    </div>
+
+                    <div class="form-group">
+                        <label>Votre nom <span class="label-hint">(optionnel - sera anonyme si laissé vide)</span></label>
+                        <input type="text" id="name" placeholder="Votre prénom ou nom">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Votre service/fonction</label>
+                        <select id="role">
+                            <option value="">Sélectionnez...</option>
+                            <option value="Collègue Service SIC">Collègue Service SIC</option>
+                            <option value="Manager/Responsable">Manager/Responsable</option>
+                            <option value="Tuteur/Maître d'apprentissage">Tuteur/Maître d'apprentissage</option>
+                            <option value="Service RH">Service RH</option>
+                            <option value="Autre service Réseau31">Autre service Réseau31</option>
+                            <option value="Partenaire externe">Partenaire externe</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comment évalueriez-vous globalement mon passage à Réseau31 ?</label>
+                        <div class="rating-container">
+                            <div class="rating-item" data-rating="1">
+                                <div class="rating-emoji">😔</div>
+                                <div>À améliorer</div>
+                            </div>
+                            <div class="rating-item" data-rating="2">
+                                <div class="rating-emoji">😐</div>
+                                <div>Correct</div>
+                            </div>
+                            <div class="rating-item" data-rating="3">
+                                <div class="rating-emoji">😊</div>
+                                <div>Bien</div>
+                            </div>
+                            <div class="rating-item" data-rating="4">
+                                <div class="rating-emoji">😄</div>
+                                <div>Très bien</div>
+                            </div>
+                            <div class="rating-item" data-rating="5">
+                                <div class="rating-emoji">🤩</div>
+                                <div>Excellent</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mes points forts selon vous <span class="label-hint">(compétences techniques, relationnelles, attitude...)</span></label>
+                        <textarea id="strengths" placeholder="Ce que vous avez apprécié dans mes analyses, mon approche, mes relations avec l'équipe, ma capacité d'adaptation..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Axes d'amélioration pour la suite</label>
+                        <textarea id="improvements" placeholder="Des conseils constructifs pour mon développement professionnel en tant que Data Analyst -soft skils ou hard skils- ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Un conseil pour mon avenir professionnel ?</label>
+                        <textarea id="advice" placeholder="Technologies data à approfondir, compétences à développer, orientations de carrière et conseil sur le plan personnel ou professionnel..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Un souvenir de notre collaboration ?</label>
+                        <textarea id="memory" placeholder="Un moment marquant, une anecdote,un souvenir, La première chose qui vous vient à l’esprit quand on dit MAYA (hors projet décisionnel 😉)…"> </textarea>
+                    </div>
+
+                    <button class="submit-btn" onclick="generateEmail()">
+                        📧 Envoyer mes commentaires par email
+                    </button>
+                </div>
+
+                <div class="info-box">
+                    <h3>🎯 Objectif de cette démarche</h3>
+                    <p>Cette première expérience professionnelle chez Réseau31 marque le début de mon parcours. Vos retours m'aideront à mieux comprendre mes forces et les axes de progression pour ma future carrière en analyse de données. Merci de prendre le temps de partager votre perspective !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedRating = null;
+
+        // Gestion des ratings
+        document.querySelectorAll('.rating-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.rating-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedRating = this.getAttribute('data-rating');
+            });
+        });
+
+        function generateEmail() {
+            const name = document.getElementById('name').value || 'Anonyme';
+            const role = document.getElementById('role').value;
+            const strengths = document.getElementById('strengths').value;
+            const improvements = document.getElementById('improvements').value;
+            const advice = document.getElementById('advice').value;
+            const memory = document.getElementById('memory').value;
+
+            if (!role) {
+                alert('Veuillez sélectionner votre service/fonction');
+                return;
+            }
+
+            if (!selectedRating) {
+                alert('Veuillez donner une évaluation globale');
+                return;
+            }
+
+            if (!strengths && !improvements && !advice && !memory) {
+                alert('Veuillez remplir au moins un champ de commentaire');
+                return;
+            }
+
+            const ratingText = ['', 'À améliorer', 'Correct', 'Bien', 'Très bien', 'Excellent'];
+            
+            // Génération du contenu email
+            let emailBody = `Feedback pour Maya Smaili - Data Analyst Réseau31%0D%0A%0D%0A`;
+            emailBody += `De : ${name}%0D%0A`;
+            emailBody += `Service/Fonction : ${role}%0D%0A`;
+            emailBody += `Évaluation globale du passage à Réseau31 : ${ratingText[selectedRating]}%0D%0A%0D%0A`;
+
+            if (strengths) {
+                emailBody += `POINTS FORTS :%0D%0A${encodeURIComponent(strengths)}%0D%0A%0D%0A`;
+            }
+
+            if (improvements) {
+                emailBody += `AXES D'AMÉLIORATION :%0D%0A${encodeURIComponent(improvements)}%0D%0A%0D%0A`;
+            }
+
+            if (advice) {
+                emailBody += `CONSEILS POUR L'AVENIR :%0D%0A${encodeURIComponent(advice)}%0D%0A%0D%0A`;
+            }
+
+            if (memory) {
+                emailBody += `SOUVENIR/ANECDOTE :%0D%0A${encodeURIComponent(memory)}%0D%0A%0D%0A`;
+            }
+
+            emailBody += `Date : ${new Date().toLocaleDateString('fr-FR')}`;
+
+            // Génération du lien mailto
+            const mailtoLink = `mailto:mayasmaili26@gmail.com?subject=Feedback%20Alternance%20-%20Maya%20Smaili%20-%20Réseau31&body=${emailBody}`;
+            
+            // Ouverture du client email
+            window.location.href = mailtoLink;
+
+            // Affichage du message de succès
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Reset du formulaire après 2 secondes
+            setTimeout(() => {
+                document.getElementById('name').value = '';
+                document.getElementById('role').value = '';
+                document.getElementById('strengths').value = '';
+                document.getElementById('improvements').value = '';
+                document.getElementById('advice').value = '';
+                document.getElementById('memory').value = '';
+                document.querySelectorAll('.rating-item').forEach(i => i.classList.remove('selected'));
+                selectedRating = null;
+                document.getElementById('successMessage').style.display = 'none';
+            }, 2000);
+        }
+
+        // Fonction pour ajouter une vidéo
+        function addVideo(videoUrl) {
+            const videoContainer = document.getElementById('videoContainer');
+            videoContainer.innerHTML = `
+                <video controls style="width: 100%; max-width: 600px; border-radius: 10px;">
+                    <source src="${videoUrl}" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+            `;
+        }
+    </script>
+</body>
+</html>
